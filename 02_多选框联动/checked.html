@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>checked</title>
+	</head>
+	<style>
+		.box {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			align-items: center;
+			width: 450px;
+			height: 450px;
+		}
+		li {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			width: 400px;
+			height: 80px;
+			margin: 10px 0;
+			font-size: 20px;
+			list-style: none;
+		}
+		.first {
+			font-weight: bolder;
+		}
+		input {
+			width: 20px;
+			height: 20px;
+		}
+		button {
+			width: 100px;
+			height: 50px;
+			margin: 0 10px;
+		}
+	</style>
+
+	<body>
+		<div class="box">
+			<ul>
+				<li class="first">
+					<input type="checkbox" />
+					<span>学号</span>
+					<span>姓名</span>
+					<span>班级</span>
+				</li>
+				<li>
+					<input type="checkbox" />
+					<span>001</span>
+					<span>张三</span>
+					<span>三班</span>
+				</li>
+				<li>
+					<input type="checkbox" />
+					<span>002</span>
+					<span>李四</span>
+					<span>四班</span>
+				</li>
+				<li>
+					<input type="checkbox" />
+					<span>003</span>
+					<span>王五</span>
+					<span>五班</span>
+				</li>
+			</ul>
+
+			<div>
+				<button>全选</button>
+				<button>反选</button>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		/* 
+        README：
+            1.通过querySelectorAll获取的结果是个集合，是个伪数组。
+            2.伪数组也可以通过索引取值。
+            3.Array.from可以将伪数组转换成数组.
+            4.要知道93行的this指向。
+        */
+
+		// 获取元素
+		const checkboxCollection = document.querySelectorAll('input')
+		const btnCollection = document.querySelectorAll('button')
+
+		// 表头的勾选项选中，【张三李四王五】要自动被选中
+		checkboxCollection[0].onclick = function () {
+			if (this.checked) {
+				Array.from(checkboxCollection).map(
+					(item) => (item.checked = 'checked')
+				)
+			} else {
+				Array.from(checkboxCollection).map(
+					(item) => (item.checked = '')
+				)
+			}
+		}
+
+		// 选中【张三李四王五】，表头的勾选项要自动被选中
+		for (let i = 1; i < checkboxCollection.length; i++) {
+			checkboxCollection[i].onclick = function () {
+				if (
+					checkboxCollection[1].checked === true &&
+					checkboxCollection[2].checked === true &&
+					checkboxCollection[3].checked === true
+				) {
+					checkboxCollection[0].checked = 'checked'
+				} else {
+					checkboxCollection[0].checked = ''
+				}
+			}
+		}
+
+		// 全选按钮
+		btnCollection[0].onclick = function () {
+			Array.from(checkboxCollection).map(
+				(item) => (item.checked = 'checked')
+			)
+		}
+
+		// 反选按钮
+		btnCollection[1].onclick = function () {
+			for (let i = 1; i < checkboxCollection.length; i++) {
+				if (checkboxCollection[i].checked === true) {
+					checkboxCollection[i].checked = ''
+				} else {
+					checkboxCollection[i].checked = 'checked'
+				}
+			}
+		}
+	</script>
+</html>
