@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>countdown</title>
+	</head>
+
+	<body>
+		<div class="countdown"></div>
+	</body>
+
+	<script>
+		/*
+        README：
+            1.定时器的使用
+            2.setTimeout和setInterval区别
+            3.new Data的使用，包括getDay、getFullYear、getTime等
+        */
+
+		// 获取元素
+		const countdownEl = document.querySelector('.countdown')
+
+		// 定义一个定时器
+		const timer = setInterval(() => {
+			return showTime()
+		})
+
+		// 定义showTime方法
+		function showTime() {
+			// 获取当前时间的时间戳
+			const now = new Date().getTime()
+			// 获取目标时间的时间戳，这里的例子写的是2023年
+			const future = new Date('2023-01-01 00:00:00')
+			// 获取时间戳的差值
+			const timeGap = future - now
+			// 判断目标时间是否已经过了
+			if (timeGap <= 0) {
+				var str = `<h2> 2023年已经到了 </h2>`
+				// 不用的定时器就关掉，这是一个好习惯
+				clearInterval(timer)
+			} else {
+				const day = parseInt(timeGap / 1000 / 60 / 60 / 24)
+				const hours = parseInt((timeGap / 1000 / 60 / 60) % 24)
+				const minutes = parseInt((timeGap / 1000 / 60) % 60)
+				const seconds = parseInt((timeGap / 1000) % 60)
+				const milliseconds = timeGap % 1000
+				var str = `
+                    <h1> 距离2023年还有： </h1>
+                    <h2> ${day}天 ${hours}小时 ${minutes}分钟 ${seconds}秒 ${milliseconds}毫秒 </h2>
+                `
+			}
+			// 替换countdownEl的文本
+			countdownEl.innerHTML = str
+		}
+	</script>
+</html>
