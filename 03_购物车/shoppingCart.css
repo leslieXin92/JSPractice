@@ -1,0 +1,138 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.head {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 80%;
+	height: 100px;
+	height: 70px;
+	margin: 0 auto;
+	color: aliceblue;
+	background-color: crimson;
+}
+
+ul {
+	width: 80%;
+	margin: 0 auto;
+}
+
+li {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	height: 100px;
+	outline: 1px solid #ccc;
+	background-color: coral;
+	list-style: none;
+}
+
+input[type='checkbox'] {
+	width: 20px;
+	height: 20px;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+.checkBox {
+	display: flex;
+	align-items: center;
+}
+
+.pic {
+	width: 70px;
+	height: 70px;
+}
+
+.pic img {
+	width: 100%;
+	height: 100%;
+}
+
+.goodsName {
+	width: 15%;
+	text-align: center;
+}
+
+.numberBox {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+}
+
+.numberBox input {
+	width: 35px;
+	height: 24px;
+	font-size: 16px;
+	line-height: 25px;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	background-color: coral;
+	outline: none;
+	border: 1px solid white;
+}
+
+.decrement,
+.increment {
+	width: 25px;
+	height: 25px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	border: 2px solid white;
+	background-color: coral;
+}
+
+.unitPrice::before,
+.totalPrice::before {
+	content: '￥';
+}
+
+.options {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 80%;
+	height: 50px;
+	margin: 0 auto;
+	color: white;
+	background-color: crimson;
+}
+
+.goodsSum::before {
+	content: '共选 : ';
+}
+
+.goodsSum::after {
+	content: ' 件物品';
+}
+
+.pay::before {
+	content: '总计 : ￥ ';
+}
+
+.delete,
+.decrement,
+.increment,
+.delChoose,
+.delAll,
+.button {
+	cursor: pointer;
+}
+
+.delete:active,
+.decrement:active,
+.increment:active,
+.delChoose:active,
+.delAll:active,
+.button:active {
+	color: purple;
+}
