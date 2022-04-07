@@ -152,11 +152,11 @@ const delChooseEl = document.querySelector('.delChoose')
 
 delChooseEl.onclick = function () {
     for (let i = 1; i < checkboxList.length; i++) {
-        if (checkboxList[i].checked == true) {
+        if (checkboxList[i].checked === true) {
             checkboxList[i].parentElement.parentElement.remove()
-            showOptionsInfo()
         }
     }
+    showOptionsInfo()
 }
 
 // 清空购物车
@@ -165,22 +165,26 @@ const delAllEl = document.querySelector('.delAll')
 delAllEl.onclick = function () {
     for (let i = 1; i < checkboxList.length; i++) {
         checkboxList[i].parentElement.parentElement.remove()
-        showOptionsInfo()
     }
+    showOptionsInfo()
 }
 
 // 底部数据展示（物品数量 + 总价）
 function showOptionsInfo () {
     const payEl = document.querySelector('.pay')
     const goodsSumEl = document.querySelector('.goodsSum')
+    const curCheckboxList = document.querySelectorAll('input[type=checkbox]')
+    const curGoodsSumCollection = document.querySelectorAll('.goodsNum')
+    const curUnitPriceCollection = document.querySelectorAll('.unitPrice')
 
     let pay = 0
     let selected = 0
 
-    for (let i = 1; i < checkboxList.length - 1; i++) {
-        if (!checkboxList[i].checked) return
-        selected += 1
-        pay += goodsSumCollection[i].value * unitPriceCollection[i].textContent
+    for (let i = 1; i < curCheckboxList.length; i++) {
+        if (curCheckboxList[i].checked) {
+            selected += 1
+            pay += curGoodsSumCollection[i - 1].value * curUnitPriceCollection[i - 1].textContent
+        }
     }
 
     payEl.textContent = pay
