@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>magnifying glass</title>
+		<style>
+			* {
+				border: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			.small {
+				position: relative;
+				width: 350px;
+				height: 350px;
+				outline: 2px solid red;
+			}
+
+			.small img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.hand {
+				display: none;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 150px;
+				height: 150px;
+				background-color: paleturquoise;
+				opacity: 0.5;
+				pointer-events: none;
+			}
+
+			.large {
+				display: none;
+				position: absolute;
+				top: 10px;
+				left: 400px;
+				width: 400px;
+				height: 400px;
+				outline: 2px solid red;
+				background: url(./image/large.jpg) no-repeat;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="small">
+			<img src="./image/small.jpg" />
+			<div class="hand"></div>
+		</div>
+
+		<div class="large"></div>
+	</body>
+
+	<script>
+		//! 获取元素
+		const smallEl = document.querySelector('.small')
+		const largeEl = document.querySelector('.large')
+		const handEl = document.querySelector('.hand')
+
+		// 放大倍数
+		const times = 400 / 150
+
+		//! 鼠标进入small
+		smallEl.onmouseover = function () {
+			handEl.style.display = 'block'
+			largeEl.style.display = 'block'
+		}
+
+		//! 鼠标离开small
+		smallEl.onmouseout = function () {
+			handEl.style.display = 'none'
+			largeEl.style.display = 'none'
+		}
+
+		//! 鼠标在small内移动
+		smallEl.onmousemove = function (e) {
+			let x = e.offsetX
+			let y = e.offsetY
+
+			x = x - 75
+			y = y - 75
+
+			x = x < 0 ? 0 : x > 200 ? 200 : x
+			y = y < 0 ? 0 : y > 200 ? 200 : y
+
+			handEl.style.top = y + 'px'
+			handEl.style.left = x + 'px'
+
+			largeEl.style.backgroundPosition = -x * times + 'px ' + -y * times + 'px'
+		}
+	</script>
+</html>
