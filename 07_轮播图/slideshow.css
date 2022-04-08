@@ -1,0 +1,78 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+li {
+	list-style: none;
+}
+
+.bigBox {
+	width: 1200px;
+	height: 534px;
+	margin: 40px auto;
+	position: relative;
+}
+
+.imgBox li {
+	display: none;
+}
+
+.show.show.show {
+	display: block;
+}
+
+.imgBox li img {
+	width: 100%;
+	height: 100%;
+}
+
+.turn {
+	width: 80px;
+	height: 150px;
+	font-size: 50px;
+	text-align: center;
+	line-height: 150px;
+	font-weight: lighter;
+	position: absolute;
+	top: 192px;
+	background: rgba(128, 0, 128, 0.5);
+	color: white;
+	cursor: pointer;
+}
+
+.turn:hover {
+	color: chartreuse;
+	background: rgba(128, 0, 128, 0.6);
+}
+
+.turn:active {
+	color: red;
+}
+
+.toLeft {
+	left: 10px;
+}
+
+.toRight {
+	right: 10px;
+}
+
+.dotBox {
+	display: flex;
+	justify-content: center;
+}
+
+.dotBox li {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	margin: 5px;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
+
+.active {
+	background: rgba(128, 0, 128, 0.6);
+}

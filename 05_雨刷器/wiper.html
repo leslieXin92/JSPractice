@@ -53,15 +53,15 @@
 
 		// 监听鼠标按下事件
 		moveEl.addEventListener('mousedown', function () {
-			document.onmousemove = function (slideHandle) {
-				let slide = slideHandle.clientX - bigBoxEl.offsetLeft
+			document.onmousemove = function (e) {
+				let slide = e.clientX - bigBoxEl.offsetLeft
 
 				slide = slide < 0 ? 0 : slide > bigBoxEl.offsetWidth ? bigBoxEl.offsetWidth : slide
 
 				moveEl.style.left = slide - 25 + 'px'
 				maskEl.style.width = slide + 'px'
 
-				slideHandle.preventDefault() //阻止选中默认事件
+				e.preventDefault() //阻止选中默认事件
 			}
 		})
 
