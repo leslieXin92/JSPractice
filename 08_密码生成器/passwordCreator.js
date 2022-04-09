@@ -11,7 +11,6 @@
     
 */
 
-
 // 获取元素
 const bigBoxEl = document.querySelector('.bigBox')
 const screenEl = document.querySelector('.screen')
@@ -25,7 +24,7 @@ const rollerInfo = rollerEl.getBoundingClientRect()
 const rollerLeft = rollerInfo.left
 const rollerWidth = rollerInfo.width
 
-const checkBoxCollection = document.querySelector('input')
+const checkBoxCollection = document.querySelectorAll('input')
 const checkBoxList = Array.from(checkBoxCollection)
 
 let checkedArr = []
@@ -71,43 +70,19 @@ function handleDragRoller () {
     }
 }
 
-// // 点击复选框
-// bigBoxEl.addEventListener('click', function (e) {
-//     const el = e.target
-//     console.log(el);
-//     console.log(!el.matches('input[type=checkbox]'))
-//     if (!el.matches('input[type=checkbox]')) return
-//     handleChangeType(el)
-// })
+// 点击复选框
+bigBoxEl.addEventListener('click', handleClickCheckbox)
 
-// // function handleClickBox (e) {
-// //     const el = e.target
-// //     console.log(el)
-// //     if (!el.matches('input[type=checkbox]')) return
-// //     handleChangeType(el)
-// // }
+function handleClickCheckbox (e) {
+    const el = e.target
+    if (!el.matches('input[type=checkbox]')) return
+    handleChangeType(el)
+}
 
-// function handleChangeType () {
-//     const checkedList = checkBoxList.filter(item => item.checked)
-//     checkedArr = checkedList.map(item => item.dataset.type)
-//     console.log(checkedArr)
-//     createPassword()
-// }
-//! 绑定筛选框点击事件
-bigBoxEl.addEventListener('click', function (e) {
-    let el = e.target;
-    if (!el.matches('input[type=checkbox]')) {
-        return;
-    }
-    typeChangeHandler(el);
-})
-
-//! 定义筛选框点击事件
-function typeChangeHandler () {
-    let checkedList = checkBoxList.filter((input) => input.checked);
-    checkedArr = checkedList.map((input) => input.dataset.type);
-    console.log(checkedArr)
-    createPassword();
+function handleChangeType () {
+    const checkedList = checkBoxList.filter(item => item.checked)
+    checkedArr = checkedList.map(item => item.dataset.type)
+    createPassword()
 }
 
 /**
@@ -132,7 +107,7 @@ function handleClickButton () {
         passwordTypeArr.push(checkedArr[temp])
     }
 
-    let passwordArr = passwordTypeArr.map(item => typeMap[item])
+    const passwordArr = passwordTypeArr.map(item => typeMap[item]())
     textareaEl.textContent = passwordArr.join('')
 }
 
@@ -163,5 +138,7 @@ function createLowerCase () {
 
 // 创建符号
 function createSymbol () {
-    // const warehouse = '~!@#$%^&*()-_=+[{]};:'"
+    const warehouse = '~!@#$%^&*()-_=+[{]};:,<.>/?' // len=27
+    const index = parseInt(Math.random() * 27)
+    return warehouse[index]
 }
