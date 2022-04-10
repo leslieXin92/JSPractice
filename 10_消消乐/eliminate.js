@@ -2,19 +2,19 @@ const game = {
     el: '', //父元素
     level: 0, // 游戏难度
     maxLevel: 3, // 最高难度
-    blocks: 0, // 
+    blocks: 0, // 牌块总数
     gameBoxWidth: 600, // 游戏区域宽度
     gameBoxHeight: 600, // 游戏区域高度
     totalCardList: [], // 所有的牌
     judgeCardList: [], // 被翻转的牌
     turned: 0, // 被翻转的牌的数
-    totalCardNum: 8, // 牌的总数
+    totalCardNum: 8, // 牌总数
 
     // 初始化
     init: function (options) {
         this.initData(options)
         this.render()
-        this.handle()
+        this.handleClick()
     },
 
     // 初始化牌
@@ -28,12 +28,12 @@ const game = {
 
     // 获取所有牌
     getTotalCardList: function () {
-        const randomCardList = this.getRandomCardList()
+        const randomCardIndexList = this.getRandomCardIndexList()
         const halfBlocks = this.blocks / 2
         let totalCardList = []
 
-        for (let i = 0; i <= halfBlocks; i++) {
-            const index = randomCardList[i]
+        for (let i = 0; i < halfBlocks; i++) {
+            const index = randomCardIndexList[i]
             const info = {
                 url: `./image/${index}.png`,
                 id: index
@@ -43,8 +43,8 @@ const game = {
         this.totalCardList = this.shuffle(totalCardList)
     },
 
-    // 返回洗完的牌
-    getRandomCardList: function () {
+    // 返回洗完的牌索引
+    getRandomCardIndexList: function () {
         const totalCardNum = this.totalCardNum
         let arr = []
         for (let i = 0; i < totalCardNum; i++) {
@@ -55,7 +55,7 @@ const game = {
 
     // 洗牌
     shuffle: function (arr) {
-        return arr.sort(() => { return 0.5 - Math.random() })
+        return arr.sort(() => 0.5 - Math.random())
     },
 
     // 渲染牌
@@ -73,35 +73,38 @@ const game = {
             const info = totalCardList[i]
             const blockEl = document.createElement('div')
             const cardEl = document.createElement('div')
+
             cardEl.style.background = `url(${info.url})`
+            cardEl.style.backgroundSize = 'contain'
+            cardEl.style.backgroundRepeat = 'no-repeat'
+            cardEl.style.backgroundPosition = 'center center'
             blockEl.style.width = `${blocksWidth}px`
             blockEl.style.height = `${blocksHeight}px`
             blockEl.cardId = info.id
+
             cardEl.setAttribute('class', 'card')
             blockEl.setAttribute('class', 'block')
-            console.log(cardEl);
-            console.log(blockEl);
             blockEl.appendChild(cardEl)
             this.el.appendChild(blockEl)
         }
     },
 
     // 监听父元素的点击事件 => 判断点击的牌是否已被点击过
-    handle: function () {
+    handleClick: function () {
         this.el.onclick = (e) => {
             const el = e.target
             const isBlock = el.classList.contains('block')
             if (isBlock) {
-                this.handleBlock(el)
+                this.handleJudge(el)
             }
         }
     },
 
-    handleBlock: function (el) {
+    // 判断
+    handleJudge: function (el) {
         const cardId = el.cardId
-        console.log(cardId);
-        let judgeCardList = this.judgeCardList;
-        let judgeLength = judgeCardList.push({
+        const judgeCardList = this.judgeCardList
+        const judgeLength = judgeCardList.push({
             id: cardId,
             el: el
         })
@@ -114,8 +117,8 @@ const game = {
 
     // 判断被翻转的牌是否相同
     judgeCard: function () {
-        const judgeCardList = this.judgeCardList;
-        const isSameCard = judgeCardList[0].id === judgeCardList[1].id;
+        const judgeCardList = this.judgeCardList
+        const isSameCard = judgeCardList[0].id === judgeCardList[1].id
         if (isSameCard) {
             this.turned += 2
         } else {
@@ -129,16 +132,16 @@ const game = {
         judgeCardList.length = 0
     },
 
+    // 判断是否赢了
     judgeWin: function () {
         if (this.turned === this.blocks) {
-            alert('呀呼')
+            alert('明天来上班！')
         }
     }
-
 }
 
-
+// 实例
 game.init({
-    el: document.getElementById('gameBox'),
-    level: 1
+    el: document.querySelector('#gameBox'),
+    level: 2
 })
