@@ -132,6 +132,15 @@
 					checkboxCollection[i].checked = 'checked'
 				}
 			}
+			if (
+				checkboxCollection[1].checked === true &&
+				checkboxCollection[2].checked === true &&
+				checkboxCollection[3].checked === true
+			) {
+				checkboxCollection[0].checked = 'checked'
+			} else {
+				checkboxCollection[0].checked = ''
+			}
 		}
 	</script>
 </html>
