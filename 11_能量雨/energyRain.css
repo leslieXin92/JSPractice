@@ -1,0 +1,58 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.game {
+	display: flex;
+	width: 70%;
+	height: 70vh;
+	outline: 2px solid red;
+	color: seagreen;
+}
+
+.content {
+	position: relative;
+	flex: 1;
+}
+
+.aside {
+	width: 200px;
+	height: inherit;
+	padding-top: 50vh;
+	font-size: 30px;
+	text-align: center;
+	outline: 2px solid red;
+}
+
+.start {
+	width: 40%;
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	color: aquamarine;
+	background-color: seagreen;
+}
+
+.ball {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	font-size: 20px;
+	border-radius: 50%;
+	cursor: pointer;
+	color: white;
+	background-color: skyblue;
+}
